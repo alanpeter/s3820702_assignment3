@@ -1,0 +1,12 @@
+#example {
+  width: 100%;
+}
+#example .ht_master tr td {
+  background-color: white;
+}
+
+#calendar {
+  padding: 10px;
+}
+
+/*# sourceMappingURL=schedule-table.css.map */

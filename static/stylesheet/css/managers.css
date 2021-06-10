@@ -1,0 +1,14 @@
+form .btn-primary {
+  background-color: #269DD8 !important;
+  border-color: #269DD8 !important;
+}
+
+#data-table tbody tr {
+  cursor: pointer;
+}
+#data-table tbody tr:hover {
+  background-color: #269DD8;
+  color: white;
+}
+
+/*# sourceMappingURL=managers.css.map */

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../static/stylesheet/css/dashboard-btn.css" rel="stylesheet">
+  <link href="../static/stylesheet/css/schedule-table.css" rel="stylesheet">
+  <link href="../static/stylesheet/css/sidenav.css" rel="stylesheet">
+  <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/handsontable@8.4.0/dist/handsontable.full.min.css" rel="stylesheet"
+    media="screen">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+</head>
+<body>
+
+    <header class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Payment Gateway</a>
+    {% if session['current_User']%}
+	    <ul class="navbar-nav px-3">
+	      <li class="nav-item text-nowrap">
+	        <a class="nav-link" href="{{ url_for('logout')}}">Sign out</a>
+	      </li>
+	    </ul>
+    {% endif %}
+    </header>
+
+  <!-- JS SCRIPT -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container">
+      <nav class="nav nav-pills flex-column flex-sm-row">
+        <a class="flex-sm-fill text-sm-center nav-link" href="{{url_for('merchant_transactions')}}">Payments</a>
+        <a class="flex-sm-fill text-sm-center nav-link active" href="{{ url_for('merchant_accounts')}}">Bank Accounts</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="#">Statistics</a>
+        <!-- <a class="flex-sm-fill text-sm-center nav-link disabled" href="#">Disabled</a> -->
+      </nav>
+    </div>
+
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Account Name</th>
+                <th scope="col">Account BSB</th>
+                <th scope="col">Account Number</th>
+                <th scope="col">Account Linked Phone</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for account in merchantAccounts %}
+                <tr>
+                  <th scope="row">{{ loop.index }}</th>
+                  <td>{{ account['account_name']}}</td>
+                  <td>{{ account['account_bsb'] }}</td>
+                  <td>{{ account['account_number'] }}</td>
+                  <td>{{ account['account_LinkedPhoneNo'] }}</td>
+                  <td>
+                      <form action="" method="post">
+                        <input type="hidden" name="account_number" 
+                        value={{account['account_number']}}>
+                        <button name ="primary-btn" type="submit" class="btn btn-primary btn-sm">Make Primary</button>
+                        <button name="delete-btn"  type="submit" class="btn btn-danger btn-sm my-2">Delete Account</button>
+                     </form>
+                  </td>
+                </tr>
+              {% endfor %}  
+            </tbody>
+          </table>
+
+          <br>
+          <a href={{"add_MerchantBankAccount"}} class="btn btn-primary">Add New Account</a>
+
+</body>
+</html>

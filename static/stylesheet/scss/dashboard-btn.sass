@@ -1,0 +1,67 @@
+$btn-blue: #269DD8
+$btn-grey: #9AA3B2
+$bg-color: #F4F5F7
+$text-black: #484B4B
+
+
+body
+    font-family: 'Poppins', sans-serif !important
+    background-color: $bg-color  !important
+
+#dashboard-btn
+    border-radius: 10px 0px 0px 10px
+        
+
+
+#staff-btn
+    border-radius: 0px 10px 10px 0px
+    
+    
+
+#dashboard-btn, #managers-btn, #staff-btn
+    background-color: white
+    color: $btn-grey
+    font-size: 12px
+    padding-top: 10px
+    height: 40px
+    &.active
+        background-color: $btn-blue !important
+        color: white
+        border-style: none
+    
+
+
+#staff-lg-btn, #managers-lg-btn, #add-btn
+    height: 150px
+    background-color: white
+    border-radius: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+    text-decoration: none
+
+    div
+        display: flex
+        align-items: center
+        a
+            color: red
+            text-decoration: none 
+        img
+            fill: $btn-blue
+        p
+            display: flex
+            justify-content: center
+            align-items: center
+            color: $text-black !important
+            text-decoration: none
+            font-size: 24px
+            span
+                font-weight: 600
+                font-size: 96px
+
+
+#add-btn
+    background-color: $btn-blue
+    i
+        font-size: 60px !important
+        color: white 

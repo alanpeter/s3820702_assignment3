@@ -1,0 +1,68 @@
+body {
+  font-family: "Poppins", sans-serif !important;
+  background-color: #F4F5F7 !important;
+}
+
+#dashboard-btn {
+  border-radius: 10px 10px 10px 10px;
+}
+
+#staff-btn {
+  border-radius: 0px 10px 10px 0px;
+}
+
+#dashboard-btn, #managers-btn, #staff-btn {
+  background-color: white;
+  color: #9AA3B2;
+  font-size: 12px;
+  padding-top: 10px;
+  height: 40px;
+}
+#dashboard-btn.active, #managers-btn.active, #staff-btn.active {
+  background-color: #269DD8 !important;
+  color: white;
+  border-style: none;
+}
+
+#staff-lg-btn, #managers-lg-btn, #add-btn {
+  height: 150px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+#staff-lg-btn div, #managers-lg-btn div, #add-btn div {
+  display: flex;
+  align-items: center;
+}
+#staff-lg-btn div a, #managers-lg-btn div a, #add-btn div a {
+  color: red;
+  text-decoration: none;
+}
+#staff-lg-btn div img, #managers-lg-btn div img, #add-btn div img {
+  fill: #269DD8;
+}
+#staff-lg-btn div p, #managers-lg-btn div p, #add-btn div p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #484B4B !important;
+  text-decoration: none;
+  font-size: 24px;
+}
+#staff-lg-btn div p span, #managers-lg-btn div p span, #add-btn div p span {
+  font-weight: 600;
+  font-size: 96px;
+}
+
+#add-btn {
+  background-color: #269DD8;
+}
+#add-btn i {
+  font-size: 60px !important;
+  color: white;
+}
+
+/*# sourceMappingURL=staff-dashboard.css.map */
