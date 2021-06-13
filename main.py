@@ -9,8 +9,14 @@ app.secret_key = 'af2ea574685f5a205b976c9e4adsd'
 
 s3 = boto3.resource('s3')
 
-### LOGIN PAGE ###
+### HOME PAGE ###
 @app.route('/', methods=['GET', 'POST'])
+def home():
+	error_message = None
+	return render_template('index.html', error=error_message)
+
+### LOGIN PAGE ###
+@app.route('/login', methods=['GET', 'POST'])
 def login(dynamodb=None):
 	error_message = None
 
@@ -36,13 +42,13 @@ def login(dynamodb=None):
 					if user['status'] == 'Not Verified':
 						return redirect(url_for('kyc_verification'))
 					else:	
-						return redirect(url_for('dashboard'))
+						return redirect(url_for('merchant_transactions'))
 				else:
 					error_message = "Invalid ID or password"
 		else:
 			error_message = "Invalid ID or password"			
 
-	return render_template('index.html', error=error_message)
+	return render_template('login.html', error=error_message)
 
 def check_UserDetails(usersTable, currentUser_Email):
 	response = usersTable.query(KeyConditionExpression=Key('email').eq(currentUser_Email))
@@ -130,7 +136,7 @@ def checkAccountDetails(accountsTable, accountNumber):
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-	return render_template('home.html')
+	return render_template('index.html')
 
 #Get list of merchant accounts
 @app.route('/merchant_accounts', methods=['GET', 'POST'])
@@ -171,10 +177,8 @@ def kyc_verification(dynamodb=None):
 		merchant_Verified = check_MerchantVerified(usersTable, current_user)
 		print(merchant_Verified)
 		if merchant_Verified:
-			print("if")
-			return redirect(url_for('dashboard'))
+			return redirect(url_for('merchant_transactions'))
 		else:
-			print("else")
 			usersTable.update_item(
 				Key={
 					'email':current_user
@@ -217,6 +221,13 @@ def merchant_transactions(dynamodb=None):
 	merchant_code = getMerchantCode(merchant)
 
 	merchantTransactions = fetch_MerchantTransactions(transcationsTable, merchant_code)
+
+	if request.method == 'POST' and 'reconcile-btn' in request.form:
+		transaction_id = request.form['transaction_id']
+		initiateReconcilation(transcationsTable, merchant_code, transaction_id)
+
+		return redirect(url_for('merchant_transactions'))
+
 	return render_template('transactions.html', error=error_message, merchantTransactions=merchantTransactions)
 
 def getMerchantCode(merchant):
@@ -227,6 +238,21 @@ def getMerchantCode(merchant):
 def fetch_MerchantTransactions(transcationsTable, merchant_code):
 	query_result = transcationsTable.scan(FilterExpression=Attr('merchant_code').eq(merchant_code))
 	return query_result['Items']
+
+def initiateReconcilation(transcationsTable, merchant_code, transaction_id):
+	query_result = transcationsTable.scan(FilterExpression=Attr('merchant_code').eq(merchant_code) & Attr('transaction_id').eq(transaction_id))
+	transcationsTable.update_item(
+		Key={
+			'transaction_id':transaction_id,
+			'merchant_code': merchant_code
+		},
+		UpdateExpression="set txn_status=:s",
+        ExpressionAttributeValues={
+            ':s': 'Initiated Reconcilation'
+        },
+        ReturnValues="UPDATED_NEW"
+	)
+
 
 ### LOGOUT PAGE ###
 @app.route('/logout', methods=['GET', 'POST'])

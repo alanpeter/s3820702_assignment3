@@ -1,58 +1,31 @@
-<!doctype html>
-<html lang="en">
+<div class="container-fluid alert alert-secondary">
+  <div class="row">
+    <div class="center">
+      <h1 class="alert alert-primary">Welcome to EASY FAST GATEWAY</h1>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <div class="alert alert-warning spacing" role="alert center" >
+        With EASY FAST PAYMENTS GATEWAY B2B payments can be done where transactions are processed between one merchant and another. There will be an increase in the volume of transactions on the e-commerce website and the economy. Payment gateways are the most popular way to process B2B payments.
+        <p></p>
+        <p></p>
+        <h4>Benefits of having a payment gateway are:</h4>
+        <p>• Instant payments can be done.</p>
+        <p>• The company needn’t worry about the transactions.</p>
+        <p>• The company can cut down the cost of database as it wouldn’t
+        need to store all the transaction related data in the database. It would only need to store references of the transaction in the company database.</p>
+        <p>• Credit-card and debit card payments can be done under one umbrella.</p>
+      </div>
+    </div>
+  </div>
+  <br>
 
-  <!-- Bootstrap core CSS -->
-  <link href="../static/stylesheet/css/dashboard-btn.css" rel="stylesheet">
-  <link href="../static/stylesheet/css/schedule-table.css" rel="stylesheet">
-  <link href="../static/stylesheet/css/sidenav.css" rel="stylesheet">
-  <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <link href="https://cdn.jsdelivr.net/npm/handsontable@8.4.0/dist/handsontable.full.min.css" rel="stylesheet"
-    media="screen">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-</head>
-<body>
-
-    <header class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Payment Gateway</a>
-    {% if session['current_User']%}
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="{{ url_for('logout')}}">Sign out</a>
-        </li>
-      </ul>
-    {% endif %}
-    </header>
-
-  <!-- JS SCRIPT -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-8">
-        <div class="card-form">
-          <form action="/" method="post">
-            <input class="form-control" type="text" placeholder="Enter Email" name="email" value="{{request.form.email }}" required>
-               <input class="form-control" type="password" placeholder="Password" name="password" value="{{
-                request.form.password }}" required>
-              <input class="btn btn-primary" type="submit" value="Login">
-          </form>
+    <div class="row">
+      <div class="center alert alert-success">
+        <h4>LETS GO!!!</h4>
+        <div class="center">
+          <a href="{{ url_for('registration')}}" class= "btn btn-primary">Sign Up</a>
+          <a href="{{ url_for('login')}}" class= "btn btn-primary">Login</a>
         </div>
       </div>
     </div>
-  </div>    
 
-  <div>
-      <a href="{{ url_for('registration')}}">Register</a>
-  </div>     
-
-</body>
-</html>
+</div>

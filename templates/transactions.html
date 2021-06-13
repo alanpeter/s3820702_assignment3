@@ -39,7 +39,7 @@
       <nav class="nav nav-pills flex-column flex-sm-row">
         <a class="flex-sm-fill text-sm-center nav-link active" href="{{ url_for('merchant_transactions')}}">Payments</a>
         <a class="flex-sm-fill text-sm-center nav-link " href="{{ url_for('merchant_accounts')}}">Bank Accounts</a>
-        <a class="flex-sm-fill text-sm-center nav-link" href="#">Statistics</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/0ce84818-5e28-4eb0-8db8-20dafaf51fe4">Statistics</a>
         <!-- <a class="flex-sm-fill text-sm-center nav-link disabled" href="#">Disabled</a> -->
       </nav>
     </div>
@@ -72,26 +72,26 @@
                   <td>{{ transaction['payer_info'] }}</td>
                   <td>{{ transaction['product'] }}</td>
                   <td>{{ transaction['txn_date'] }}</td>
-                  {% if transaction['status'] == 'Success'%}
+                  {% if transaction['txn_status'] == 'Success'%}
                     <td>
-                      <button class="btn btn-success btn-sm">{{ transaction['status'] }}</button>
+                      <button class="btn btn-success btn-sm">{{ transaction['txn_status'] }}</button>
                     </td>
-                  {% elif transaction['status'] == 'Failed'%}
+                  {% elif transaction['txn_status'] == 'Failed'%}
                     <td>
-                      <button class="btn btn-danger btn-sm">{{ transaction['status'] }}</button>
+                      <button class="btn btn-danger btn-sm">{{ transaction['txn_status'] }}</button>
                     </td>
-                  {% elif transaction['status'] == 'Pending'%}
+                  {% elif transaction['txn_status'] == 'Pending'%}
                     <td>
-                      <button class="btn btn-pending btn-sm">{{ transaction['status'] }}</button>
+                      <button class="btn btn-warning btn-sm">{{ transaction['txn_status'] }}</button>
+                    </td>
+                  {% elif transaction['txn_status'] == 'Initiated Reconcilation'%}
+                    <td>
+                      <button class="btn btn-secondary btn-sm">{{ transaction['txn_status'] }}</button>
                     </td>
                   {% endif %}
                   <td>
                       <form action="" method="post">
-                        <input type="hidden" name="transaction_id" 
-                        value={{transaction['transaction_id']}}>
-                        <button name ="upload-btn" type="submit" class="btn btn-primary btn-sm">Upload Invoice</button>
-                        <button name="download-btn"  type="submit" class="btn btn-secondary  btn-sm my-2">Downlod Invoice</button>
-                        <button name="download-btn"  type="submit" class="btn btn-info  btn-sm my-2">Reconcile</button>
+                        <button name="reconcile-btn"  type="submit" class="btn btn-info  btn-sm my-2">Reconcile</button>
                      </form>
                   </td>
                 </tr>
