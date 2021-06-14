@@ -91,6 +91,8 @@
                   {% endif %}
                   <td>
                       <form action="" method="post">
+                        <input type="hidden" name="transaction_id" 
+                        value="{{transaction['transaction_id']}}">
                         <button name="reconcile-btn"  type="submit" class="btn btn-info  btn-sm my-2">Reconcile</button>
                      </form>
                   </td>
